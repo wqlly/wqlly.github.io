@@ -123,11 +123,6 @@
       font-size: 17px;
     }
 
-    .advisor {
-      margin-top: 18px;
-      font-size: 14px;
-    }
-
     nav {
       display: flex;
       flex-wrap: wrap;
@@ -204,21 +199,6 @@
 
     .publication p {
       font-size: 14px;
-    }
-
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .links a {
-      display: inline-block;
-      padding: 5px 13px;
-      border: 1px solid #b3c4b7;
-      font-size: 13px;
-      text-decoration: none;
     }
 
     .timeline-item {
@@ -362,7 +342,6 @@
         data-en="My research focuses on symmetric-key cryptanalysis and design, particularly differential-linear cryptanalysis, geometric approaches, and the security of lightweight cryptography.">
         我的研究方向是对称密码安全性分析与设计，主要关注差分线性密码分析、几何方法以及轻量级密码的安全性。
       </p>
-
     </header>
 
     <nav aria-label="Sections">
@@ -425,22 +404,6 @@
           data-en="We improve round-based estimates of differential-linear correlations using Super S-boxes and enlarged χ units, with applications to PRESENT, GIFT, Subterranean-2.0, and Koala-p.">
           通过超级 S 盒与扩大 χ 单元改进差分线性相关度的轮式估计，并应用于 PRESENT、GIFT、Subterranean-2.0 和 Koala-p 等密码算法。
         </p>
-
-
-          <!--
-            如需提供论文下载：
-            将 PDF 命名为 paper.pdf，上传到 index.html 同一目录，
-            再取消下面链接的注释。
-
-            <a href="paper.pdf"
-               target="_blank"
-               rel="noopener noreferrer"
-               data-zh="论文 PDF ↗"
-               data-en="Paper PDF ↗">
-              论文 PDF ↗
-            </a>
-          -->
-        </div>
       </article>
     </section>
 
@@ -558,25 +521,30 @@
 
   <script>
     const toggle = document.getElementById("language-toggle");
-    const translatedElements = document.querySelectorAll("[data-zh][data-en]");
+    const translatedElements =
+      document.querySelectorAll("[data-zh][data-en]");
 
     let language = "zh";
 
     try {
       const savedLanguage = localStorage.getItem("qi-wang-language");
-      if (savedLanguage === "en") language = "en";
+      if (savedLanguage === "en") {
+        language = "en";
+      }
     } catch {
-      // 网站仍可在浏览器禁用本地存储时正常运行。
+      // 禁用本地存储时，页面仍可正常运行。
     }
 
     function applyLanguage() {
-      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+      document.documentElement.lang =
+        language === "zh" ? "zh-CN" : "en";
 
       translatedElements.forEach(element => {
         element.textContent = element.dataset[language];
       });
 
       toggle.textContent = language === "zh" ? "EN" : "中文";
+
       toggle.setAttribute(
         "aria-label",
         language === "zh" ? "Switch to English" : "切换到中文"
